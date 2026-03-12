@@ -288,6 +288,18 @@ export class PushService {
     this.backgroundHandler = null;
   }
 
+  async getDeliveredNotifications(): Promise<Notification[]> {
+    try {
+      return await PushNotificationModule.getDeliveredNotifications();
+    } catch {
+      return [];
+    }
+  }
+
+  async removeDeliveredNotification(id: string): Promise<void> {
+    await PushNotificationModule.removeDeliveredNotification(id);
+  }
+
   private generateId(): string {
     return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
